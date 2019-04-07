@@ -8,4 +8,9 @@
 import Foundation
 
 public class NetworkKit {
+    
+    public class func request(_ endpoint: Endpoints, method: Methods, completionHandler: @escaping ((Response)->Void)) {
+        let networkManager = NetworkManager()
+        networkManager.request(endpoint, method: method, completionHandler: completionHandler)
+    }
 }

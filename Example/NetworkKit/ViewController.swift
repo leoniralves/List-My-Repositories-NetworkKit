@@ -7,18 +7,29 @@
 //
 
 import UIKit
+import NetworkKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var lbResult: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        NetworkKit.request(.repos, method: .GET) { [weak self] response in
+            switch response {
+            case .success( _):
+                DispatchQueue.main.sync {
+                    self?.lbResult.text = "Sucesso!"
+                }
+                print("Success")
+            case .error( _):
+                DispatchQueue.main.sync {
+                    self?.lbResult.text = "Falha!"
+                }
+                print("Error")
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 
